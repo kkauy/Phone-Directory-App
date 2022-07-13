@@ -1,18 +1,18 @@
 // add a new row in html table
 function addRow(summaryTable, contactName, mobileNumber, email) {
-
+    // find out the table row
     let table = document.getElementById(summaryTable);
-  
     let rowCount = table.rows.length;
     let row = table.insertRow(rowCount);
-  
+
+    // create a cell on each row
     let cell1 = row.insertCell(0);
-    cell1.innerHTML = contactName;
-  
-    let cell2 = row.insertCell(1);
-    cell2.innerHTML = mobileNumber;
-  
+    let cell2 = row.insertCell(1);    
     let cell3 = row.insertCell(2);
+    
+    // Assign input to each cell
+    cell1.innerHTML = contactName;
+    cell2.innerHTML = mobileNumber;
     cell3.innerHTML = email;
   }
   
@@ -34,44 +34,51 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     return true;
   }
   
-  document.getElementById('submit').addEventListener('click', (e) => {
-      let name = document.getElementById('name').value;
-      let mobile = document.getElementById('mobile').value;
-      let email = document.getElementById('email').value;
+// input is added after clicking the button
+  const submit =document.getElementById('submit');
+    submit.addEventListener('click', (e) => {
+        let name = document.getElementById('name').value;
+        let mobile = document.getElementById('mobile').value;
+        let email = document.getElementById('email').value;
   
-      if (!isValidInput(name, mobile, email)) {
+        if (!isValidInput(name, mobile, email)) {
           // show error block
           document.getElementById("error").style.display = "inline-flex";
-      } else {
+        } else {
+         // insert input to each row
         document.getElementById("error").style.display = "none";
-          addRow("summaryTable", name, mobile, email);
-      }
-  });
+          const addValue = addRow("summaryTable", name, mobile, email);
+            //Clear the field after submitting
+            e.preventDefault();
+            const inputs = document.querySelectorAll('#name, #mobile, #email');
+            // looping all input and empty them
+            inputs.forEach(input => {
+            input.value = '';
+            });
+        }
+    });
+    //   Searching the matched numbers
+    const search= document.getElementById('search');
+        search.addEventListener('keyup', (e) => {
+        // contains all rows data
+        const searchStr = document.getElementById('search').value;
+        const table = document.getElementById("summaryTable");
+        const tr = table.getElementsByTagName("tr"); 
   
-  document.getElementById('search').addEventListener('keyup', (e) => {
-    
-    let searchStr = document.getElementById('search').value;
-    
-    let table = document.getElementById("summaryTable");
-    let tr = table.getElementsByTagName("tr"); // contains all rows data
-  
-  
-    // TODO: need to re-initialize somehow?
-    // hidden rows from previous run is not shown
-  
-    for (let i = 1; i < tr.length; i++) {
-      // Hide the row initially.
-      tr[i].style.display = "none";
-  
-      let td = tr[i].getElementsByTagName("td");
-      let cell = td[1];
-      if (cell) {
-        if (cell.innerHTML.includes(searchStr)) {
-          tr[i].style.display = ""; // show this row
-        } 
-      }
-    }
-  });
+        // hidden rows from previous run is not shown
+        for (let i = 1; i < tr.length; i++) {
+        // Hide the row initially.
+            tr[i].style.display = "none";
+            let td = tr[i].getElementsByTagName("td");
+            let cell = td[1];
+            if (cell) {
+                // filled field matchs the search data
+                if (cell.innerHTML.includes(searchStr)) {
+                    tr[i].style.display = ""; // show this row
+                } 
+            }
+        }
+    });
   
   function sortTable(n){
     let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -110,6 +117,9 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     }
   }
   
-  document.getElementById('nameColumn').addEventListener('click', (e) => {
-    sortTable(0) // 0 means the first column
+
+  const nameCol = document.getElementById('nameColumn');
+  nameCol.addEventListener('click', (e) => {
+    // 0 means the first column
+    sortTable(0) 
   });
