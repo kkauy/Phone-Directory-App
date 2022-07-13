@@ -41,7 +41,7 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
   
       if (!isValidInput(name, mobile, email)) {
           // show error block
-          document.getElementById("error").style.display = "inline";
+          document.getElementById("error").style.display = "inline-flex";
       } else {
         document.getElementById("error").style.display = "none";
           addRow("summaryTable", name, mobile, email);
@@ -49,7 +49,7 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
   });
   
   document.getElementById('search').addEventListener('keyup', (e) => {
-  
+    
     let searchStr = document.getElementById('search').value;
     
     let table = document.getElementById("summaryTable");
@@ -59,7 +59,7 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     // TODO: need to re-initialize somehow?
     // hidden rows from previous run is not shown
   
-    for (let i = 1; i <= tr.length; i++) {
+    for (let i = 1; i < tr.length; i++) {
       // Hide the row initially.
       tr[i].style.display = "none";
   
@@ -68,7 +68,6 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
       if (cell) {
         if (cell.innerHTML.includes(searchStr)) {
           tr[i].style.display = ""; // show this row
-          break;
         } 
       }
     }
@@ -79,7 +78,6 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     table = document.getElementById("summaryTable");
     switching = true;
     dir = "asc";
-
     while (switching) {
       switching = false;
       rows = table.rows;
