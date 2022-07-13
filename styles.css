@@ -49,7 +49,7 @@ button:active {
   font-weight: bold;
 }
 input:focus {
-  outline: none !important;
+  outline: none;
 }
 .d-inbl {
   display: inline-block;
