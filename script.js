@@ -79,7 +79,12 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
             }
         }
     });
-  
+  // Name sorting by clicking  column "name"
+  const nameCol = document.getElementById('nameColumn');
+  nameCol.addEventListener('click', (e) => {
+    // 0 means the first column
+    sortTable(0) 
+  });
   function sortTable(n){
     let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("summaryTable");
@@ -117,9 +122,3 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     }
   }
   
-
-  const nameCol = document.getElementById('nameColumn');
-  nameCol.addEventListener('click', (e) => {
-    // 0 means the first column
-    sortTable(0) 
-  });
