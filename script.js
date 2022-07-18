@@ -22,15 +22,9 @@ function addRow(summaryTable, contactName, mobileNumber, email) {
     let mobileNumberRegex = new RegExp("(?=^.{10}$)^([0-9]+)$");
     let emailRegex = new RegExp("(?=^.{0,40}$)^([a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,3})$");
   
-    if (!contactNameRegex.test(contactName)) {
+    if (!contactNameRegex.test(contactName) || !mobileNumberRegex.test(mobileNumber || !emailRegex.test(email) )  {
         return false;
-    }
-    if (!mobileNumberRegex.test(mobileNumber)) {
-        return false;
-    }
-    if (!emailRegex.test(email)) {
-        return false;
-    }
+    } 
     return true;
   }
   
